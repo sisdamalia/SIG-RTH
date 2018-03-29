@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Sistem Informasi Geografis</title>
+		<h2><center>RUANG TERBUKA HIJAU</center></h2>
+		<h3><center>di Bandar Lampung</center></h3>
+    <p><center>Reload sampai gambar Cluster muncul</center><p>
+        <style>
+            #map {
+                background-color: gray;
+                width: 100%;
+                height: 480px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+function initMap() {
+	var lampung={lat: -4.558585, lng: 105.406808};
+	var map=new google.maps.Map(document.getElementById('map'),{zoom:7,center:lampung});
+	console.log(map);
+	var infowindow = new google.maps.InfoWindow();
+	var contentString = '<h3>PROVINSI LAMPUNG</h3><hr>' +
+						'<h5> Luas 34.623,80 km2, jumlah penduduk 9.543.231 Jiwa</h5>';
+						infowindow.setContent(contentString);
+
+	var marker=new google.maps.Marker({position:lampung,map:map});
+    marker.addListener('click',function(){
+	infowindow.open(map,marker);
+	});
+
+	var infoWin = new google.maps.InfoWindow();
+	// Add some markers to the map.
+	// Note: The code uses the JavaScript Array.prototype.map() method to
+	// create an array of markers based on a given "locations" array.
+	// The map() method here has nothing to do with the Google Maps API.
+	var markers = locations.map(function(location, i) {
+    var marker = new google.maps.Marker({position: location});
+
+    google.maps.event.addListener(marker, 'click', function(evt){
+	infoWin.setContent(location.info);
+	infoWin.open(map, marker);
+	})
+    return marker;
+	});
+
+	// Add a marker clusterer to manage the markers.
+	var markerCluster = new MarkerClusterer(map, markers, {
+    imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+	});
+
+}
+
+	var locations = [
+        {lat: -5.421654, lng: 105.259917, info: '<h3 style = background:#7EF84C;"><center>TAMAN GAJAH</center></h3><hr> <h4>Luas Daerah 15.000 m2, diresmikan pada 10 feb 2018</h4>'},
+        {lat: -5.400797, lng: 105.207149, info: '<h3 style = background:#7EF84C;"><center>TAMAN KALPATARU</center></h3><hr> <h4>Fasilitas olah raga yang tersedia adalah lapangan sepak bola & jogging track di sekeliling lapangan</h4>'},
+		{lat: -5.445769, lng: 105.262162, info: '<h3 style = background:#7EF84C;"><center>TAMAN DIPANGGA</center></h3><hr> <h4>Luas Daerah 800 m2, didirikan pada tahun 1981</h4>'},
+        {lat: -5.380881, lng: 105.284523, info: '<h3 style = background:#7EF84C;"><center>TAMAN HUTAN KOTA</center></h3><hr> <h4>Merupakan salah satu kawasan konservasi alam di Kota Bandar Lampung</h4>'},
+        ];
+
+	google.maps.event.addDomListener(window, "load", initMap);
+	</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgguC6i63tqFRC_6V86XosB4gCmBM8mRU&callback=initMap"></script>
+<script src="src/markerclusterer.js">
+</script>
+		<h5><i>Mela Rahmadani 1617051049 | Nur Shabrina 1671051099 | Sisda Amalia Utrujah 1617051075</h5>
+</html>
